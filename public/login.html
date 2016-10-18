@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+</head>
+<body>
+	Username: <input id="username">
+	Password: <input id="password" type="password">
+	<button id="login">Log In</button>
+	<button id="signup">Sign Up</button>
+
+	<script>
+		$('#login').click(function() {
+			var user = {
+				username: $('#username').val(),
+				password: $('#password').val()
+			};
+			
+			$.post('/api/login', user, function(res) {
+				console.log(res);
+				if (res === "success") {
+					document.location = "/";
+				} else {
+					alert("username or password was incorrect, try again.");
+				}
+			});
+		});
+
+		$('#signup').click(function() {
+			var user = {
+				username: $('#username').val(),
+				password: $('#password').val()
+			};
+			console.log(user);
+			$.post('/api/signup',user, function(res) {
+				console.log(res);
+				if (res === "success") {
+					alert("You're signed up!");
+					// document.location = "/";
+				} else {
+					alert("username or password was incorrect, try again.");
+				}
+			});
+		});
+
+	</script>
+</body>
+</html>
